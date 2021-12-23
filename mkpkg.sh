@@ -26,7 +26,7 @@ else
 		cp $(command -v $cmd) bin
 
 		echo -e "\n[$cmd] Packing & Compressing...."
-		tar -cvzf $cwd/$cmd.tgz .
+		tar -cvzf $cwd/$cmd-$(uname -o)-$(uname -m).tgz .
 		[ $? = 0 ] && rm -rf $cwd/.tmp/$cmd
 	done
 
