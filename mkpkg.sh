@@ -14,8 +14,10 @@ else
 			[ -d $PREFIX/$i ] && mkdir $i
 		done
 
+		echo "Fetching Library of $cmd...."
 		for lib in `ldd $(command -v $cmd)`; do
 			if [ "$lib" != "libc.so" ]; then
+				echo -n "$lib "
 				[ -e $PREFIX/lib64/$lib ] && cp $PREFIX/lib64/$lib lib64
 				[ -e $PREFIX/lib/$lib ] && cp $PREFIX/lib/$lib lib
 			fi
@@ -23,7 +25,7 @@ else
 
 		cp $(command -v $cmd) bin
 
-		echo "Packing $cmd...."
+		echo -e "\nPacking & Compressing $cmd...."
 		tar -cvzf $cwd/$cmd.tgz .
 		[ $? = 0 ] && rm -rf $cwd/.tmp/$cmd
 	done
