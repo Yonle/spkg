@@ -20,9 +20,11 @@ Making package
 ==============
 Making a package is a easy-to-do task. However, You should remember that:
 * They're only store binary, libraries, and that's it. Nothing else. It does not store /etc, or even /include files.
-* Symlink will be followed.
-* Libc.so will be stored (If it's not symlink).
-* It's package dependencies will also stored on it.
+* It's package dependencies will also stored on it. They can't be splitted.
 
 To make a package, Simply do:
-  ~ # sh mkpkg.sh <command>
+  ~ # mkspkg <commands>
+
+Creating a multiple packages can be done by separating commands with space, By example:
+  ~ # mkspkg bash nano vim
+
