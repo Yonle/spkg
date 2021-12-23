@@ -1,0 +1,28 @@
+Simple Package Manager
+======================
+Yet, a simple package manager written in bash.
+Two lines but perfectly done.
+
+Basics
+======
+
+* Installing spkg package
+  ~ # spkg package.tgz
+
+* Uninstalling spkg package
+  First of all, Track the important library.
+  ~ # ldd $(command -v commandname)
+
+  Then remove the library one by one
+  ~ # rm $PREFIX/lib/<library-name.so>
+
+Making package
+==============
+Making a package is a easy-to-do task. However, You should remember that:
+* They're only store binary, libraries, and that's it. Nothing else. It does not store /etc, or even /include files.
+* Symlink will be followed.
+* Libc.so will be stored (If it's not symlink).
+* It's package dependencies will also stored on it.
+
+To make a package, Simply do:
+  ~ # sh mkpkg.sh <command>
