@@ -1,3 +1,4 @@
 #!/usr/bin/env sh
 
-ln -s spkg.sh $PREFIX/bin/spkg
+ln -s $(pwd)/spkg.sh $PATH/spkg
+ln -s $(pwd)/mkpkg.sh $PATH/mkspkg
