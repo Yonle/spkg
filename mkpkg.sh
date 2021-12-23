@@ -22,7 +22,9 @@ else
 		done
 
 		cp $(command -v $cmd) bin
-		tar -czf $cwd/$cmd.tgz .
+
+		echo "Packing $cmd...."
+		tar -cvzf $cwd/$cmd.tgz .
 		[ $? = 0 ] && rm -rf $cwd/.tmp/$cmd
 	done
 fi

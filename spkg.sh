@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
-tar -C $PREFIX -xzf $*
+tar -C $PREFIX -xvzf $*
 
 
