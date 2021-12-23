@@ -29,4 +29,6 @@ else
 		tar -cvzf $cwd/$cmd.tgz .
 		[ $? = 0 ] && rm -rf $cwd/.tmp/$cmd
 	done
+
+	[ $? = 0 ] && rm -rf $cwd/.tmp
 fi
