@@ -3,6 +3,8 @@ Simple Package Creator & Installer
 Yet, a simple package creator, and it's installer written in bash.
 Two lines but perfectly done.
 
+Currently working in Termux & Going to make it work on several UNIX based operating system.
+
 Basics
 ======
 
