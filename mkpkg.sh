@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+ldd() {
+	objdump -p $1 | grep NEEDED | cut -d' ' -f18
+}
+
+track_lib() {
+	! [ -e "$1" ] && return;
+	i=`ldd $1`
+	[ $? != 0 ] && return;
+	echo $i
+	! [ -z "$i" ] && track_lib $PREFIX/lib/$i 
+}
+
 if [ $# = 0 ]; then
 	echo "Usage: mkpkg <commands>"
 else
@@ -10,6 +22,11 @@ else
 		mkdir -p $cwd/.tmp/$cmd
 		cd $cwd/.tmp/$cmd
 
+		clib() {
+			[ -e $PREFIX/lib64/$1 ] && cp $PREFIX/lib64/$1 lib64
+			[ -e $PREFIX/lib/$1 ] && cp $PREFIX/lib/$1 lib
+		}
+
 		for i in lib lib64 bin; do
 			[ -d $PREFIX/$i ] && mkdir $i
 		done
@@ -18,8 +35,13 @@ else
 		for lib in `ldd $(command -v $cmd)`; do
 			if [ "$lib" != "libc.so" ]; then
 				echo -n "$lib "
-				[ -e $PREFIX/lib64/$lib ] && cp $PREFIX/lib64/$lib lib64
-				[ -e $PREFIX/lib/$lib ] && cp $PREFIX/lib/$lib lib
+				for i in `track_lib $PREFIX/lib/$lib || track_lib $PREFIX/lib64/$lib`; do
+					if [ "$i" != "libc.so" ]; then
+						echo -n "$i "
+						clib $i
+					fi
+				done
+				clib $lib
 			fi
 		done
 
