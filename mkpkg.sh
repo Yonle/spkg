@@ -2,7 +2,7 @@
 
 ldd() {
 	r=`readelf -d $1 | grep -o "\[.*\.so.*]" | sed "s/\[//g" | sed "s/\]//g"`
-	[ "$r" = "$1" ] && return;
+	[ "$r" != "$1" ] && echo $r
 }
 
 track_lib() {
