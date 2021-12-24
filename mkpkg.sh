@@ -23,6 +23,7 @@ else
 		cd $cwd/.tmp/$cmd
 
 		clib() {
+			echo -n "$1 "
 			[ -e $PREFIX/lib64/$1 ] && cp $PREFIX/lib64/$1 lib64
 			[ -e $PREFIX/lib/$1 ] && cp $PREFIX/lib/$1 lib
 		}
@@ -34,10 +35,8 @@ else
 		echo "[$cmd] Fetching Library...."
 		for lib in `ldd $(command -v $cmd)`; do
 			if [ "$lib" != "libc.so" ]; then
-				echo -n "$lib "
 				for i in `track_lib $PREFIX/lib/$lib || track_lib $PREFIX/lib64/$lib`; do
 					if [ "$i" != "libc.so" ]; then
-						echo -n "$i "
 						clib $i
 					fi
 				done
