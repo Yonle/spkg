@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 ldd() {
-	objdump -p $1 | grep NEEDED | cut -d' ' -f18
+	readelf -d $1 | grep -o "\[.*\.so.*]" | sed "s/\[//g" | sed "s/\]//g"
 }
 
 track_lib() {
