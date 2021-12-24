@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 ldd() {
-	readelf -d $1 | grep -o "\[.*\.so.*]" | sed "s/\[//g" | sed "s/\]//g"
+	r=`readelf -d $1 | grep -o "\[.*\.so.*]" | sed "s/\[//g" | sed "s/\]//g"`
+	[ "$r" = "$1" ] && return;
 }
 
 track_lib() {
