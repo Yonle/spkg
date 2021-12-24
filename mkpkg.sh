@@ -32,8 +32,8 @@ else
 			[ -e /lib64/$1 ] && cp /lib64/$1 lib64
 			[ -e $PREFIX/local/lib/$1 ] && cp $PREFIX/local/lib/$1 lib
 			[ -e $PREFIX/local/lib64/$1 ] && cp $PREFIX/local/lib64/$1 lib64
-			[ -e /system/lib/$1 ] && cp /system/lib/$1 lib
-			[ -e /system/lib64/$1 ] && cp /system/lib64/$1 lib64
+			#[ -e /system/lib/$1 ] && cp /system/lib/$1 lib
+			#[ -e /system/lib64/$1 ] && cp /system/lib64/$1 lib64
 		}
 
 		for i in lib lib64 bin; do
