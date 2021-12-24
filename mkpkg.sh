@@ -20,6 +20,7 @@ else
 		! command -v $cmd > /dev/null && echo "$cmd not found" &&  exit 1
 		[ -d $cwd/.tmp/$cmd ] && rm -rf $cwd/.tmp/$cmd
 		mkdir -p $cwd/.tmp/$cmd
+		[ $? != 0 ] && exec echo "I can't create package file on this directory."
 		cd $cwd/.tmp/$cmd
 
 		clib() {
