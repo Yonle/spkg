@@ -6,11 +6,11 @@ ldd() {
 }
 
 track_lib() {
-	! [ -e "$1" ] && return;
+	! [ -e "$1" ] || [ "$1" = "$2" ] && return;
 	i=`ldd $1`
 	[ $? != 0 ] && return;
 	echo $i
-	! [ -z "$i" ] && track_lib $PREFIX/lib/$i 
+	! [ -z "$i" ] && track_lib $PREFIX/lib/$i $1
 }
 
 if [ $# = 0 ]; then
